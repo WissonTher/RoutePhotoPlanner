@@ -1,0 +1,1 @@
+# RoutePhotoPlanner - aplikacja do planowania zdjęć szlaku
