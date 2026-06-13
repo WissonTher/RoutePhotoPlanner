@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Photo Planner</title>
+
+    <link rel="stylesheet" href="leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    </head>
+<body>
+    <div class="container">
+        <div id="sidebar">
+            <h2>Route Photo Planner</h2>
+            <p>Przeciągnij i upuść plik GPX, aby zobaczyć trasę na mapie.</p>
+        </div>
+
+        <div id="map">
+            <div id="drop-overlay">
+                <div class="drop-text">
+                    Upuść plik GPX
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+
+    <script src="js/map.js"></script>
+    <script src="js/drag-and-drop.js"></script>
+    <script src="js/resize.js"></script>
+
+</body>
+</html>
