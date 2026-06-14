@@ -1,35 +1,36 @@
-var overlay = document.getElementById('drop-overlay');
+var overlay = document.getElementById("drop-overlay");
 var dragCounter = 0;
 var currentTrackLayer = null;
+var backTrackLayer = null;
 
-window.addEventListener('dragenter', function (e) {
+window.addEventListener("dragenter", function (e) {
     e.preventDefault();
     dragCounter++;
-    overlay.style.display = 'flex';
+    overlay.style.display = "flex";
 });
 
-window.addEventListener('dragover', function (e) {
+window.addEventListener("dragover", function (e) {
     e.preventDefault();
 });
 
-window.addEventListener('dragleave', function (e) {
+window.addEventListener("dragleave", function (e) {
     e.preventDefault();
     dragCounter--;
     if (dragCounter === 0) {
-        overlay.style.display = 'none';
+        overlay.style.display = "none";
     }
 });
 
-window.addEventListener('drop', function (e) {
+window.addEventListener("drop", function (e) {
     e.preventDefault();
     dragCounter = 0;
-    overlay.style.display = 'none';
+    overlay.style.display = "none";
     
     var file = e.dataTransfer.files[0];
     if (!file) return;
 
-    if (!file.name.toLowerCase().endsWith('.gpx')) {
-        alert('Plik nie zawiera rozszerzenia .gpx.');
+    if (!file.name.toLowerCase().endsWith(".gpx")) {
+        alert("Plik nie zawiera rozszerzenia .gpx.");
         return;
     }
 
@@ -39,9 +40,10 @@ window.addEventListener('drop', function (e) {
         
         if (currentTrackLayer) {
             map.removeLayer(currentTrackLayer);
+            map.removeLayer(backTrackLayer);
         }
 
-        if (typeof generatedMarkers !== 'undefined') {
+        if (typeof generatedMarkers !== "undefined") {
             generatedMarkers.forEach(function(marker) {
                 map.removeLayer(marker);
             });
@@ -49,7 +51,7 @@ window.addEventListener('drop', function (e) {
         }
 
 
-        new L.GPX(gpxData, {
+        backTrackLayer = new L.GPX(gpxData, {
             async: false,
             marker_options: {
                 startIconUrl: null,
@@ -59,9 +61,9 @@ window.addEventListener('drop', function (e) {
             polyline_options: {
                     color: "#300035",
                     weight: 8,
-                    lineCap: 'round'
+                    lineCap: "round"
             }
-        }).addTo(map);
+        });
         currentTrackLayer = new L.GPX(gpxData, {
             async: false,
             marker_options: {
@@ -72,10 +74,11 @@ window.addEventListener('drop', function (e) {
             polyline_options: {
                     color: "#ee49f4",
                     weight: 4,
-                    lineCap: 'round'
+                    lineCap: "round"
             }
         });
 
+        backTrackLayer.addTo(map);
         currentTrackLayer.addTo(map);
 
         map.fitBounds(currentTrackLayer.getBounds());
