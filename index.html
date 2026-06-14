@@ -8,12 +8,53 @@
     <link rel="stylesheet" href="leaflet/dist/leaflet.css">
     <link rel="stylesheet" href="css/style.css">
 
-    </head>
+</head>
 <body>
     <div class="container">
         <div id="sidebar">
             <h2>Route Photo Planner</h2>
             <p>Przeciągnij i upuść plik GPX, aby zobaczyć trasę na mapie.</p>
+            <div id="route-info">
+                <h3>Szacowany czas trasy:</h3>
+                <p id="estimated-time">-</p>
+                <p>
+                    <small>
+                        (Dystans: <span id="distance">-</span> km, 
+                        Podejścia: <span id="approaches">-</span> m,
+                        Zejścia: <span id="descents">-</span> m)
+                    </small>
+                </p>
+            </div>
+            <div id="distance-between-points">
+                <h3>Odległość między stanowiskami:</h3>
+                <div class="input-container">
+                    <input type="number" id="distance-input" value="25" min="1" max="1000">
+                    <p id="distance-unit">metrów</p>
+                </div>
+            </div>
+            <div id="time-of-photos">
+                <h3>Wykonanie zdjęć na stanowisku:</h3>
+                <div class="input-container">    
+                    <input type="number" id="photo-time-input" value="45" min="1" max="1000">
+                    <p id="photo-unit">sekund</p>
+                </div>
+            </div>
+            <div id="number-of-photos">
+                <h3>Liczba zdjęć na stanowisku:</h3>
+                <div class="input-container">    
+                    <input type="number" id="photo-number-input" value="8" min="1" max="360">
+                    <p id="numof-unit">fotografii</p>
+                </div>
+            </div>
+            <button id="plan-route">Zaplanuj trasę</button>
+
+            <div id="planning-result">
+                <h3>Wynik planowania:</h3>
+                <p id="estimated-with-photos">-</p>
+                <p id="estimated-for-photos">-</p>
+                <p id="num-of-stations">-</p>
+                <p id="num-of-photos">-</p>
+            </div>
         </div>
 
         <div id="map">
@@ -28,9 +69,11 @@
     <script src="leaflet/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
+    <script src="js/config.js"></script>
     <script src="js/map.js"></script>
+    <script src="js/functions.js"></script>
     <script src="js/drag-and-drop.js"></script>
-    <script src="js/resize.js"></script>
+    <script src="js/route-planner.js"></script>
 
 </body>
 </html>
